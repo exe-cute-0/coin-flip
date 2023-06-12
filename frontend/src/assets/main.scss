@@ -1,0 +1,71 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+}
+
+:root {
+  --c-primary-600: #1c1742;
+  --c-primary-500: #2d2664;
+  --c-primary-400: #574ea1;
+  --c-primary-300: #776bd5;
+  --c-primary-200: #a8a0f5;
+  --c-primary-100: #d9d5ff;
+
+  --c-secondary-600: #421733;
+  --c-secondary-500: #63264e;
+  --c-secondary-400: #a14d83;
+  --c-secondary-300: #d66bb1;
+  --c-secondary-200: #f59fd7;
+  --c-secondary-100: #ffd6f1;
+
+  --c-neutral-600: #000000;
+  --c-neutral-500: #3f3f3f;
+  --c-neutral-400: #7a7a7a;
+  --c-neutral-300: #a9a9a9;
+  --c-neutral-200: #d2d2d2;
+  --c-neutral-100: #ffffff;
+
+  --px-mn: 2px;
+  --px-sm: 5px;
+  --px-md: 10px;
+  --px-lg: 20px;
+  --px-xl: 40px;
+
+  --tx-xs: 10px;
+  --tx-sm: 12px;
+  --tx-md: 14px;
+  --tx-lg: 16px;
+  --tx-xl: 18px;
+
+  --c-bg: var(--c-primary-600);
+  --c-white: var(--c-neutral-100);
+  --c-text: var(--c-white);
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--c-primary-400);
+  font-size: var(--tx-lg);
+  padding: var(--px-md);
+  border-radius: var(--px-lg);
+  border: var(--px-mn) solid var(--c-primary-200);
+  color: var(--c-white);
+  min-width: 80px;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  &:hover {
+    background-color: var(--c-primary-300);
+  }
+  &:active {
+    background-color: var(--c-primary-200);
+  }
+}
+
+body {
+  background-color: var(--c-bg);
+  font-family: "Roboto Light", sans-serif;
+  color: var(--c-text);
+}
