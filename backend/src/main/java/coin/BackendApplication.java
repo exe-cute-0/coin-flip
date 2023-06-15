@@ -2,7 +2,12 @@ package coin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.util.random.RandomGenerator;
+
+@EnableScheduling
 @SpringBootApplication
 public class BackendApplication {
 
@@ -10,4 +15,8 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 
+    @Bean
+    RandomGenerator randomGenerator() {
+        return RandomGenerator.getDefault();
+    }
 }

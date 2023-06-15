@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/coin.iml" filepath="$PROJECT_DIR$/coin.iml" />
       <module fileurl="file://$PROJECT_DIR$/coin-flip.iml" filepath="$PROJECT_DIR$/coin-flip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/flipper.iml" filepath="$PROJECT_DIR$/backend/flipper.iml" />
     </modules>
   </component>
 </project>
