@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RoundRepository extends JpaRepository<Round, Long> {
 
-    List<Round> findByCreatedAfter(OffsetDateTime threshold);
+    List<Round> findByFlippedIsNullOrFlippedAfter(OffsetDateTime threshold);
 
     @Modifying
     @Query(nativeQuery = true, value = "UPDATE round SET player_heads = :player WHERE round_id = :roundId AND player_heads IS NULL")

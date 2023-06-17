@@ -37,6 +37,7 @@
   --tx-md: 14px;
   --tx-lg: 16px;
   --tx-xl: 18px;
+  --tx-xxl: 24px;
 
   --c-bg: var(--c-primary-600);
   --c-white: var(--c-neutral-100);
@@ -62,10 +63,29 @@ button {
   &:active {
     background-color: var(--c-primary-200);
   }
+  
+  &.secondary {
+    background-color: var(--c-secondary-400);
+    border: var(--px-mn) solid var(--c-secondary-200);
+
+    &:hover {
+      background-color: var(--c-secondary-300);
+    }
+    &:active {
+      background-color: var(--c-secondary-200);
+    }
+  }
 }
 
 body {
   background-color: var(--c-bg);
   font-family: "Roboto Light", sans-serif;
   color: var(--c-text);
+}
+
+#app {
+  padding: var(--px-xl);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--px-xl);;
 }

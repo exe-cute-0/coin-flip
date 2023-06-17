@@ -31,13 +31,13 @@ public class RoundService {
 
     @Scheduled(fixedDelay = 1, initialDelay = 2, timeUnit = TimeUnit.SECONDS)
     public void sync() {
-        for (Round round : this.repository.findByCreatedAfter(OffsetDateTime.now().minusSeconds(30))) {
+        for (Round round : this.repository.findByFlippedIsNullOrFlippedAfter(OffsetDateTime.now().minusSeconds(10))) {
             this.entityManager.detach(round);
             this.activeRounds.put(round.getId(), round);
         }
 
         for (Round round : this.getActiveRounds()) {
-            if (round.getFlipped() != null && OffsetDateTime.now().minusSeconds(30).isAfter(round.getFlipped())) {
+            if (round.getFlipped() != null && OffsetDateTime.now().minusSeconds(10).isAfter(round.getFlipped())) {
                 this.activeRounds.remove(round.getId());
             }
         }

@@ -29,7 +29,6 @@ const flips = syncFlips()
   grid-template-columns: repeat(1, 1fr);
   grid-auto-rows: 180px;
   gap: var(--px-md);
-  padding: var(--px-xl);
 
   .slot {
     border-radius: var(--px-md);

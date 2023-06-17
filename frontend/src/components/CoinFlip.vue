@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import Avatar from "@/components/Avatar.vue"
 import type {Flip} from "@/api/client";
-import {ref} from "vue";
+import {join} from "@/api/client";
 
-const toss = ref<HTMLInputElement | null>(null)
+const player = localStorage.getItem('player') as string
 
-const tossCoin = () => {
-  const el = toss.value
-  if (el) {
-    el.classList.add(Math.random() > 0.5 ? 'to-heads' : 'to-tails')
-    // el.addEventListener('animationend', () => el.classList.remove('to-heads', 'to-tails'), {once: true})
-  }
+function joinTails() {
+  join(flip, player, "TAILS")
+      .catch(() => {
+      })
 }
 
+function joinHeads() {
+  join(flip, player, "HEADS")
+      .catch(() => {
+      })
+}
 
 const {flip} = defineProps<{
   flip: Flip,
@@ -21,24 +24,36 @@ const {flip} = defineProps<{
 
 <template>
   <div class="flip">
-    <div class="side head">
+    <div
+        class="side head"
+        :class="{
+          'winner': flip.outcome === 'HEADS',
+          'loser': flip.outcome === 'TAILS',
+        }"
+    >
       <span class="selection">Heads</span>
       <Avatar
-          v-if="flip.heads !== undefined"
-          :player="flip.heads"
-          :selection="'head'"
+          v-if="flip.playerHeads !== null"
+          :player="flip.playerHeads"
+          :selection="'HEADS'"
       />
       <div
           v-else
           class="join"
       >
-        <button>Join</button>
+        <button @click="joinHeads">Join</button>
       </div>
       <span class="amount">{{ flip.amount }}</span>
     </div>
     <div class="vs">
-      <!--      <span>VS</span>-->
-      <div ref="toss" class="toss" @click="tossCoin()">
+      <div
+          v-if="flip.outcome !== null"
+          class="toss"
+          :class="{
+            'to-heads' : flip.outcome === 'HEADS',
+            'to-tails' : flip.outcome === 'TAILS',
+          }"
+      >
         <div class="coin">
           <div class="head">
             <span>HEADS</span>
@@ -48,19 +63,26 @@ const {flip} = defineProps<{
           </div>
         </div>
       </div>
+      <span v-else>VS</span>
     </div>
-    <div class="side tail">
+    <div
+        class="side tail"
+        :class="{
+          'winner': flip.outcome === 'TAILS',
+          'loser': flip.outcome === 'HEADS',
+        }"
+    >
       <span class="selection">Tails</span>
       <Avatar
-          v-if="flip.tails !== undefined"
-          :player="flip.tails"
-          :selection="'tail'"
+          v-if="flip.playerTails !== null"
+          :player="flip.playerTails"
+          :selection="'TAILS'"
       />
       <div
           v-else
           class="join"
       >
-        <button>Join</button>
+        <button @click="joinTails" class="secondary">Join</button>
       </div>
       <span class="amount">{{ flip.amount }}</span>
     </div>
@@ -83,6 +105,8 @@ const {flip} = defineProps<{
   align-items: center;
   flex-basis: 30%;
   justify-content: space-between;
+  opacity: 1;
+  transition: 0.6s opacity 5.5s ease-out;
 
   .selection {
     font-size: var(--tx-sm);
@@ -123,18 +147,18 @@ const {flip} = defineProps<{
   transform-style: preserve-3d;
 
   &.to-tails {
-    animation: toss 1s 2 alternate cubic-bezier(0.24, 0.63, 0, 1);
+    animation: 1s cubic-bezier(0.24, 0.63, 0, 1) 3s 2 alternate toss;
 
     .coin {
-      animation: spin-to-tails 1.9s 1 forwards linear;
+      animation: 1.9s linear 3s 1 forwards spin-to-tails;
     }
   }
 
   &.to-heads {
-    animation: toss 1s 2 alternate cubic-bezier(0.24, 0.63, 0, 1);
+    animation: 1s cubic-bezier(0.24, 0.63, 0, 1) 3s 2 alternate toss;
 
     .coin {
-      animation: spin-to-heads 1.9s 1 forwards linear;
+      animation: 1.9s linear 3s 1 forwards spin-to-heads;
     }
   }
 }

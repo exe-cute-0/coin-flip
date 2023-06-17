@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.random.RandomGenerator;
 
 @Service
@@ -14,8 +15,9 @@ public class FlipperService {
     private final RoundService roundService;
     private final RandomGenerator randomGenerator;
 
-    public Round makeRound(String player, Round.Outcome side) {
-        Round.RoundBuilder draft = Round.builder();
+    public Round makeRound(String player, BigDecimal amount, Round.Outcome side) {
+        Round.RoundBuilder draft = Round.builder()
+                .amount(amount);
 
         if (side.equals(Round.Outcome.HEADS)) {
             draft.playerHeads(player);

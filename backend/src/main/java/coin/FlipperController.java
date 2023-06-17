@@ -2,15 +2,14 @@ package coin;
 
 import coin.persistence.Round;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class FlipperController {
 
     private final FlipperService flipperService;
@@ -18,12 +17,13 @@ public class FlipperController {
 
     record RoundDraft(
             String player,
+            BigDecimal amount,
             Round.Outcome outcome
     ) {}
 
     @PostMapping("/rounds")
     public Round makeRound(@RequestBody RoundDraft roundDraft) {
-        return this.flipperService.makeRound(roundDraft.player, roundDraft.outcome);
+        return this.flipperService.makeRound(roundDraft.player, roundDraft.amount, roundDraft.outcome);
     }
 
     @GetMapping("/rounds")

@@ -1,8 +1,10 @@
 package coin.persistence;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
@@ -24,6 +26,10 @@ public class Round {
 
     @Column(name = "created", nullable = false)
     private OffsetDateTime created;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Column(name = "amount", nullable = false)
+    private BigDecimal amount;
 
     @Column(name = "flipped")
     private OffsetDateTime flipped;

@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import type {Player} from "@/api/client";
+import type {Outcome, Player} from "@/api/client";
 
 const { player } = defineProps<{
   player: Player,
-  selection: 'head'|'tail',
+  selection: Outcome
 }>()
 </script>
 
 <template>
   <div>
-    <svg :class="selection" viewBox="0 0 56 56">
+    <svg :class="{
+      'head': selection === 'HEADS',
+      'tail': selection === 'TAILS',
+    }" viewBox="0 0 56 56">
       <circle r="24" cx="28" cy="28" />
     </svg>
-    <span>{{ player.id }}</span>
+    <span>{{ player }}</span>
   </div>
 </template>
 
