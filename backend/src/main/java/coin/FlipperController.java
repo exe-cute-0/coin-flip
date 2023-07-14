@@ -21,12 +21,12 @@ public class FlipperController {
             Round.Outcome outcome
     ) {}
 
-    @PostMapping("/rounds")
+    @PostMapping("/api/rounds")
     public Round makeRound(@RequestBody RoundDraft roundDraft) {
         return this.flipperService.makeRound(roundDraft.player, roundDraft.amount, roundDraft.outcome);
     }
 
-    @GetMapping("/rounds")
+    @GetMapping("/api/rounds")
     public Collection<Round> getRounds() {
         return this.roundService.getActiveRounds();
     }
@@ -37,7 +37,7 @@ public class FlipperController {
             Round.Outcome outcome
     ) {}
 
-    @PostMapping("/rounds/join")
+    @PostMapping("/api/rounds/join")
     public void joinRound(@RequestBody JoinRequest joinRequest) {
         this.flipperService.joinRound(joinRequest.roundId, joinRequest.player, joinRequest.outcome);
     }

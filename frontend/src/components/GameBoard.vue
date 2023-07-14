@@ -8,16 +8,18 @@ const flips = syncFlips()
 <template>
   <div class="board">
     <template
-        v-for="n in 12"
-        :key="`${flips[n-1]?.id ?? '-'}:${n}`"
+        v-for="(flip, n) in flips"
+        :key="`t-${flip?.id ?? '-'}:${n}`"
     >
       <div
-          v-if="n-1 >= flips.length"
+          v-if="flip === null"
           class="slot"
+          :key="`t--${n}`"
       />
       <CoinFlip
           v-else
-          :flip="flips[n-1]"
+          :flip="flip"
+          :key="`t-${flip.id}:${n}`"
       />
     </template>
   </div>

@@ -42,7 +42,7 @@ public class RoundService {
             }
         }
 
-        log.info("Active rounds: {}", this.activeRounds.size());
+        log.debug("Active rounds: {}", this.activeRounds.size());
     }
 
     public Collection<Round> getActiveRounds() {
